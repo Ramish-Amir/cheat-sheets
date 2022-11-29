@@ -14,7 +14,7 @@ Create Serverless Project and Deploy Lambda:
     - Create project:
         - serverless create --template <TEMPATE-NAME> --path <PATH/DIR-NAME>
 
-    # Add aws profile name in the "Provider" of yml (config) file.
+    # Add aws profile name in the "Provider" of serverless.yml (config) file.
 
     - DEPLOY:
         - serverless deploy
