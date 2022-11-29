@@ -1,20 +1,50 @@
+Conventions:
 
+-  : Step
+>  : Code
+>> : Command
+
+
+#
 Setup Serveless Framework: 
     - Create IAM User.
-        - create user with "Programmatic Access".
+        - Create user with "Programmatic Access".
         - Add "Adminitrative Access" policiy to the user.
     
     - Install serveless (globally):
-        - npm install -g serverless
+        >> npm install -g serverless
 
     - Setup credentials in the terminal:
-        - serveless config credentials --provider aws --key <IAM-USER-ACCESS-KEY-ID> --secret <IAM-USER-SECRET-KEY> --profile <ANY-PROFILE-NAME-OF-YOUR-CHOICE>
+        >> serveless config credentials --provider aws --key <IAM-USER-ACCESS-KEY-ID> --secret <IAM-USER-SECRET-KEY> --profile <ANY-PROFILE-NAME-OF-YOUR-CHOICE>
 
+#
 Create Serverless Project and Deploy Lambda:
     - Create project:
-        - serverless create --template <TEMPATE-NAME> --path <PATH/DIR-NAME>
+        >> serverless create --template <TEMPATE-NAME> --path <PATH/DIR-NAME>
 
-    # Add aws profile name in the "Provider" of serverless.yml (config) file.
+    - Add aws profile name in the "Provider" of serverless.yml (config) file.
+        > provider:
+            profile: <YOUR-PROFILE-NAME>
 
     - DEPLOY:
-        - serverless deploy
+        >> serverless deploy
+
+#
+Connecting S3 bucket:
+    - Add resource for s3 bucket (in serverless.yml):
+        > resources:
+            Resources:
+                <YourResourceName>:
+                    Type: AWS::S3::Bucket
+                    Properties:
+                        BucketName: <YOUR-UNIQUE-BUCKETNAME>
+    
+    - Add new plugin:
+        > plugins:
+            - serverless-s3-sync
+            
+    - Add custom parameter:
+        > custom:
+            s3Sync:
+                - bucketName: <YOUR-UNIQUE-BUCKETNAME>
+                
